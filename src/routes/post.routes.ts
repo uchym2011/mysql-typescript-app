@@ -3,6 +3,7 @@ import { Router } from "express";
 const router = Router();
 
 import { getPosts, createPost, getPost, deletePost, updatePost} from '../controllers/post.contollers';
+
 router.route('/')
       .get(getPosts)
       .post(createPost);

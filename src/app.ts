@@ -5,7 +5,7 @@ import morgan from 'morgan';
 // Routes
 import IndexRoutes from './routes/index.routes';
 import PostRoutes from './routes/post.routes';
-
+import TaskRoutes from './routes/task.routes';
 
 export class App {
     
@@ -31,6 +31,7 @@ export class App {
     routes() {
         this.app.use(IndexRoutes);
         this.app.use('/posts',PostRoutes);
+        this.app.use('/tasks',TaskRoutes);
     }
 
     async listen() {
