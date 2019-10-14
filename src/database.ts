@@ -4,7 +4,7 @@ import { createPool } from 'promise-mysql';
 
 export async function connect() {
     const connection = await createPool({
-         host: '78.11.180.182',
+         host: '78.11.155.22',
         user: 'mysql',
         password: '5WcK5uJ4TL2s93gy',
         database: 'node_mysql_ts',
