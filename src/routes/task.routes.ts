@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const router = Router();
 
-import { getTasks, createTask, getTask, deleteTask, updateTask, createUpdateTask } from '../controllers/tasks.controllers';
+import { getTasks, createTask, getTask, deleteTask, updateTask, createUpdateTask, getTaskByUser, deleteTaskByUser, updateTaskByUser, getTasksByUser, createUpdateTasksByUser } from '../controllers/tasks.controllers';
 
 
 import cors from 'cors';
@@ -27,12 +27,22 @@ router.route('/')
       .post(createTask)
       .put(createUpdateTask);
 
-router.route('/:taskId')
+/* router.route('/:taskId')
       .get(getTask)
       .delete(deleteTask)
       .put(updateTask)
+      ;  */
 
-      ;      
+      router.route('/:userId')
+      .get(getTasksByUser)
+      .put(createUpdateTasksByUser);
+
+router.route('/:userId/:taskId')
+      .get(getTaskByUser)
+      .delete(deleteTaskByUser)
+      .put(updateTaskByUser)
+
+      ;         
 
 //enable pre-flight
 router.options("*", cors(options));
