@@ -100,7 +100,9 @@ export async function updateTaskByUser(req: Request, res: Response) {
 }
 
 export async function createUpdateTask(req: Request, res: Response) {
+    console.log('createUpdateTask');
     const newTask: Array<Task> = req.body; 
+    console.log('createUpdateTask' + req.body);
     const conn = await connect();
 
     for (var _i = 0; _i < newTask.length; _i++) {
@@ -126,6 +128,7 @@ export async function createUpdateTask(req: Request, res: Response) {
 
 export async function createUpdateTasksByUser(req: Request, res: Response) {
     const newTask: Array<Task> = req.body; 
+    console.log('createUpdateTasksByUser');
     const conn = await connect();
 
     for (var _i = 0; _i < newTask.length; _i++) {

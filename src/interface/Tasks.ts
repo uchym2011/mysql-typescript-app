@@ -5,5 +5,6 @@ export interface Task {
     created: string;
     end?: string;
     isDone: boolean;
+    priority: string;
   }
   

@@ -4,11 +4,25 @@ import { createPool } from 'promise-mysql';
 
 export async function connect() {
     const connection = await createPool({
-         host: '78.11.155.22',
+        //host: '46.242.232.152',
+        /*host: 'hosting1940837.online.pro',
+        user: '00286230_mysql',
+        password: '5WcK5uJ4TL2s93gy',
+        database: '00286230_mysql',
+        connectionLimit: 100,
+        port: 3306*/
+
+        host: '192.168.1.167',
         user: 'mysql',
         password: '5WcK5uJ4TL2s93gy',
         database: 'node_mysql_ts',
         connectionLimit: 10 
+
+        /*host: '78.11.155.22',
+        user: 'mysql',
+        password: '5WcK5uJ4TL2s93gy',
+        database: 'node_mysql_ts',
+        connectionLimit: 10 */
         /*host: 'mysql-sh220297.super-host.pl',
         user: 'db100042222_user',
         password: 'Z3uyDunL',
