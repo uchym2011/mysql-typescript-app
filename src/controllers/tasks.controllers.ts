@@ -130,9 +130,9 @@ export async function createUpdateTask(req: Request, res: Response) {
                     console.log('INSERT INTO tasks SET ?',[newTask[_i]]);
                     await conn.query('insert into tasks set ?',[newTask[_i]]);
                     
-                    return res.json({
-                        message: 'Zadania zostały zapisane!'
-                    });
+                    //return res.json({
+                    //    message: 'Zadania zostały zapisane!'
+                    //});
                 }
             }; 
 
