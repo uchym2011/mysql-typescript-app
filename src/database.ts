@@ -25,6 +25,9 @@ export async function connect() {
         user: 'mysql',
         password: 'vps2020mysql',
         database: 'node_mysql_ts',
+        connectTimeout  : 60 * 60 * 1000,
+        acquireTimeout  : 60 * 60 * 1000,
+        timeout         : 60 * 60 * 1000,
         connectionLimit: 100000000 
 
         /*host: '78.11.155.22',

@@ -138,8 +138,9 @@ export async function createUpdateTask(req: Request, res: Response) {
 
         }
         else if (newTask[_i].isDone == -1) {
-            console.log('DELETE FROM tasks WHERE userId = ? AND id = ', [newTask[_i].userId, newTask[_i].id]);
-            const del = await conn.query('DELETE FROM tasks WHERE userId = ? AND id = ?', [newTask[_i].userId, newTask[_i].id]);
+            console.log('UPD DELETE FROM tasks WHERE userId = ? AND isDone = -1', [newTask[_i].userId]);
+            await conn.query('UPDATE tasks SET name = ?, isDone = ?, end = ? WHERE id = ?', [newTask[_i].name, newTask[_i].isDone, newTask[_i].end, newTask[_i].id]);
+            const del = await conn.query('DELETE FROM tasks WHERE userId = ? AND isDone = -1', [newTask[_i].userId]);
         }
         else if (newTask[_i].isDone == 1) {
             console.log('v2 UPDATE tasks SET name = ?, isDone = ?, end = ? WHERE id = ?', [newTask[_i].name, newTask[_i].isDone, newTask[_i].end, newTask[_i].id]);
@@ -153,6 +154,8 @@ export async function createUpdateTask(req: Request, res: Response) {
         
         }*/
     
+        conn.end;
+
     }
     return res.json({
         message: 'Zadania zostały zapisane!'
