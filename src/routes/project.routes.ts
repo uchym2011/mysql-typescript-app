@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const router = Router();
 
-import { getProjectsUsers } from '../controllers/projects.controllers';
+import { getProjectsUsers, insertProjectIfNotExists } from '../controllers/projects.controllers';
 
 
 import cors from 'cors';
@@ -20,7 +20,8 @@ const options:cors.CorsOptions = {
 router.use(cors(options));
 
 router.route('/:userId')
-      .get(getProjectsUsers);      
+      .get(getProjectsUsers)
+      .put(insertProjectIfNotExists);      
 
 //enable pre-flight
 router.options("*", cors(options));
