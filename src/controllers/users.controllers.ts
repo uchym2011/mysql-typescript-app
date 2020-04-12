@@ -25,6 +25,6 @@ export async function getUser(req: Request, res: Response) {
     console.log('select * from users where userId = ?',[userId]);
     const user: User = await conn.query('select * from users where userId = ?',[userId]);
 
-    conn.end;
+    conn.releaseConnection;
     return res.json(user); 
 }

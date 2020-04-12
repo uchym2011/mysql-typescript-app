@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const router = Router();
 
-import { getTasks, createTask, getTask, deleteTask, updateTask, createUpdateTask, getTaskByUser, deleteTaskByUser, updateTaskByUser, getTasksByUser, createUpdateTasksByUser } from '../controllers/tasks.controllers';
+import { getTasks, createTask, createUpdateTask, getTaskByUser, deleteTaskByUser, updateTaskByUser, getTasksByUser, createUpdateTasksByUser } from '../controllers/tasks.controllers';
 
 
 import cors from 'cors';
@@ -26,12 +26,6 @@ router.route('/')
       .get(getTasks)
       .post(createTask)
       .put(createUpdateTask);
-
-/* router.route('/:taskId')
-      .get(getTask)
-      .delete(deleteTask)
-      .put(updateTask)
-      ;  */
 
       router.route('/:userId')
       .get(getTasksByUser)

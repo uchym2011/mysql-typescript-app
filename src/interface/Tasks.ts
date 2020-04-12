@@ -6,5 +6,6 @@ export interface Task {
     end?: string;
     isDone: number;
     priority: string;
+    projectId?: number;
   }
   

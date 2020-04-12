@@ -28,7 +28,7 @@ export async function connect() {
         connectTimeout  : 60 * 60 * 1000,
         acquireTimeout  : 60 * 60 * 1000,
         timeout         : 60 * 60 * 1000,
-        connectionLimit: 100000000 
+        connectionLimit: 100000000000000000 
 
         /*host: '78.11.155.22',
         user: 'mysql',
@@ -43,4 +43,9 @@ export async function connect() {
     });
     console.log('Połaczenie z bazą poprawne!!');
     return connection;
+}
+
+export async function getConnect() {
+    const getConnection = (await connect()).getConnection();
+    return getConnection;
 }
