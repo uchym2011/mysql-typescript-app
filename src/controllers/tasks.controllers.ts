@@ -7,7 +7,7 @@ export async function getTasks(req: Request, res: Response) {
     console.log('............ export async function getTasks');
     const conn = await getConnect();
     const tasks = await conn.query('SELECT * FROM tasks');
-    conn.release;
+    conn.destroy();
     conn.end;
     res.json(tasks);
     //res.header()
@@ -20,8 +20,9 @@ export async function getTasksByUser(req: Request, res: Response) {
     const userid = req.params.userId;
     const conn = await getConnect();
     const tasks = await conn.query('SELECT * FROM tasks WHERE userId = ?', [userid]);
-    conn.release;
     conn.end;
+    conn.destroy();
+
     res.json(tasks);
     //res.header()
 };
@@ -46,8 +47,8 @@ export async function createTask(req: Request, res: Response) {
     //for (var item of newTask) {
     //console.log(" test for "+item._id); // 9,2,5
     //}
-    conn.release;
     conn.end;
+    conn.destroy();
     return res.json({
         message: 'Zadanie zostało utworzone!'
     });
@@ -58,8 +59,8 @@ export async function getTaskByUser(req: Request, res: Response) {
     const id = req.params.userId;
     const conn = await getConnect();
     const task = await conn.query('SELECT * FROM tasks WHERE userId = ?', [id]);
-    conn.release;
     conn.end;
+    conn.destroy();
     return res.json(task);
 }
 
@@ -71,8 +72,8 @@ export async function deleteTaskByUser(req: Request, res: Response) {
     const userid = req.params.userId;
     const conn = await getConnect();
     const task = await conn.query('DELETE FROM tasks WHERE id = ? AND userId = ?', [taskid, userid]);
-    conn.release;
-    conn.end;
+    conn.destroy();
+    conn.destroy();
     return res.json({
         message: 'Zadanie zostało usunięte!'
     });
@@ -85,8 +86,8 @@ export async function updateTaskByUser(req: Request, res: Response) {
     const updateTask = req.body;
     const conn = await getConnect();
     await conn.query('UPDATE tasks SET ? WHERE id = ? AND userId = ?', [updateTask, taskid, userid]);
-    conn.release;
     conn.end;
+    conn.destroy();
     return res.json({
         message: 'Post został zmieniony!'
     });
@@ -127,10 +128,19 @@ export async function createUpdateTask(req: Request, res: Response) {
 
         }
 
-    } finally {
+    } catch (err) {
 
-        conn.release;
+        await conn.rollback;
         conn.end;
+        conn.destroy();
+        console.log('!!!!!!!!! catch err' + err);
+        // Throw the error again so others can catch it.
+        throw err;
+
+    } finally {
+        console.log('%%%%%% finaly ');
+        conn.end;
+        conn.destroy();
         return res.json({
             message: 'Zadania zostały zapisane!'
         });
@@ -142,7 +152,7 @@ export async function createUpdateTasksByUser(req: Request, res: Response) {
     console.log('............ export async function createUpdateTask');
     const newTask: Array<Task> = req.body;
     //console.log('tasks.controllers.ts #1 createUpdateTasksByUser');
-    const conn = await connect();
+    const conn = await getConnect();
 
     try {
 
@@ -160,11 +170,20 @@ export async function createUpdateTasksByUser(req: Request, res: Response) {
 
         }
 
+
+    } catch (err) {
+
+        await conn.rollback;
+        conn.end;
+        conn.destroy();
+        console.log('!!!!!!!!! catch err' + err);
+        // Throw the error again so others can catch it.
+        throw err;
+
     } finally {
 
-        conn.release;
-        conn.releaseConnection;
         conn.end;
+        conn.destroy();
 
         return res.json({
             message: 'Zadania zostały zapisane!'

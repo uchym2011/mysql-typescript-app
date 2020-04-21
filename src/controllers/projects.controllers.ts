@@ -13,7 +13,7 @@ export async function getProjectsUsers(req: Request, res: Response) {
     //console.log('select * from projects where userid = ?', [userId]);
     const project: Project = await conn.query('select * from projects where userid = ?', [userId]);
 
-    conn.release;
+    conn.destroy()
     conn.end;
     return res.json(project);
 
@@ -54,10 +54,10 @@ export async function insertProjectIfNotExists(req: Request, res: Response) {
 
     } finally {
 
-        conn.release;
         conn.end;
+        conn.destroy();
 
-        //console.log('################## insertProjectIfNotExists conn.release()');
+        console.log('################## insertProjectIfNotExists conn.release()');
 
     }
 
@@ -74,9 +74,9 @@ export async function insertProject(req: Request, res: Response) {
     
     await conn.query('insert into projects set ?', [newProject[0]]);
 
-    conn.release;
     conn.end;
-
+    conn.destroy();
+    
     return res.json({
         message: 'Project userid: ' + newProject[0].userId + ' projectId: ' + newProject[0].projectId + ' został utworzony!'
     });
