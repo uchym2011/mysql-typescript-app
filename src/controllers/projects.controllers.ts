@@ -80,4 +80,4 @@ export async function insertProject(req: Request, res: Response) {
     return res.json({
         message: 'Project userid: ' + newProject[0].userId + ' projectId: ' + newProject[0].projectId + ' został utworzony!'
     });
-}
+} 

@@ -7,5 +7,6 @@ export interface Task {
     isDone: number;
     priority: string;
     projectId?: number;
+    description?: string;
   }
   

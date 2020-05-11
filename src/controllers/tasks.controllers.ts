@@ -118,12 +118,12 @@ export async function createUpdateTask(req: Request, res: Response) {
             }
             else if (newTask[_i].isDone == -1) {
                 //console.log('UPD DELETE FROM tasks WHERE userId = ? AND isDone = -1', [newTask[_i].userId]);
-                await conn.query('UPDATE tasks SET name = ?, isDone = ?, end = ? WHERE id = ?', [newTask[_i].name, newTask[_i].isDone, newTask[_i].end, newTask[_i].id]);
+                await conn.query('UPDATE tasks SET name = ?, isDone = ?, end = ?, description = ? WHERE id = ?', [newTask[_i].name, newTask[_i].isDone, newTask[_i].end, newTask[_i].description, newTask[_i].id]);
                 await conn.query('DELETE FROM tasks WHERE userId = ? AND isDone = -1', [newTask[_i].userId]);
             }
             else if (newTask[_i].isDone == 1) {
                 //console.log('v2 UPDATE tasks SET name = ?, isDone = ?, end = ? WHERE id = ?', [newTask[_i].name, newTask[_i].isDone, newTask[_i].end, newTask[_i].id]);
-                await conn.query('UPDATE tasks SET name = ?, isDone = ?, end = ? WHERE id = ?', [newTask[_i].name, newTask[_i].isDone, newTask[_i].end, newTask[_i].id]);
+                await conn.query('UPDATE tasks SET name = ?, isDone = ?, end = ?, description = ? WHERE id = ?', [newTask[_i].name, newTask[_i].isDone, newTask[_i].end, newTask[_i].description, newTask[_i].id]);
             }
 
         }
@@ -163,8 +163,8 @@ export async function createUpdateTasksByUser(req: Request, res: Response) {
                 await conn.query('insert into tasks set ?', [newTask[_i]]);
             } else {
                 //console.log(newTask[_i] + ' UPDATEEEEEEEEEEEEEE');
-                console.log('tasks.controllers.ts #2 UPDATE tasks SET name = ?, isDone = ?, end = ? WHERE id = ? AND userId = ?', [newTask[_i].name, newTask[_i].isDone, newTask[_i].end, newTask[_i].id, newTask[_i].userId]);
-                await conn.query('UPDATE tasks SET name = ?, isDone = ?, end = ? WHERE id = ? AND userId = ?', [newTask[_i].name, newTask[_i].isDone, newTask[_i].end, newTask[_i].id, newTask[_i].userId]);
+                console.log('tasks.controllers.ts #2 UPDATE tasks SET name = ?, isDone = ?, end = ?, description = ? WHERE id = ? AND userId = ?', [newTask[_i].name, newTask[_i].isDone, newTask[_i].end, newTask[_i].description, newTask[_i].id, newTask[_i].userId]);
+                await conn.query('UPDATE tasks SET name = ?, isDone = ?, end = ?, description = ? WHERE id = ? AND userId = ?', [newTask[_i].name, newTask[_i].isDone, newTask[_i].end, newTask[_i].description, newTask[_i].id, newTask[_i].userId]);
             }
             //await conn.query('insert into tasks set ?',[newTask[_i]]);
 
